@@ -1,0 +1,69 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Microservicio Tienda Puerto - PHP",
+    "version": "1.0.0",
+    "description": "Microservicio CRUD de productos (PHP) conectado a Supabase"
+  },
+  "paths": {
+    "/productos": {
+      "get": {
+        "summary": "Lista todos los productos",
+        "responses": { "200": { "description": "Lista de productos" } }
+      },
+      "post": {
+        "summary": "Crea un nuevo producto",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nombre": { "type": "string" },
+                  "categoria": { "type": "string" },
+                  "precio": { "type": "number" },
+                  "stock": { "type": "integer" },
+                  "descripcion": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "201": { "description": "Producto creado" } }
+      }
+    },
+    "/productos/{id}": {
+      "get": {
+        "summary": "Obtiene un producto por id",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }],
+        "responses": { "200": { "description": "Producto encontrado" }, "404": { "description": "No encontrado" } }
+      },
+      "put": {
+        "summary": "Actualiza un producto existente",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nombre": { "type": "string" },
+                  "categoria": { "type": "string" },
+                  "precio": { "type": "number" },
+                  "stock": { "type": "integer" },
+                  "descripcion": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "Producto actualizado" } }
+      },
+      "delete": {
+        "summary": "Elimina un producto",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }],
+        "responses": { "200": { "description": "Producto eliminado" } }
+      }
+    }
+  }
+}
